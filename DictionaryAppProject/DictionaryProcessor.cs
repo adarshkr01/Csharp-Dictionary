@@ -5,21 +5,18 @@ namespace DictionaryAppProject
 {
     public class DictionaryProcessor
     {
-        private ILanguageValidator languageValidator;
-        private ILogger logger;
-        private IAPIRequests apiRequests;
-        private IAPIRunner apiRunner;
+        private ILanguageValidator _languageValidator;
+        private ILogger _logger;
+        private IAPIRunner _apiRunner;
 
         public DictionaryProcessor(
                                     ILanguageValidator languageValidator,
                                     ILogger logger,
-                                    IAPIRequests apiRequests,
                                     IAPIRunner apiRunner)
         {
-            this.languageValidator = languageValidator;
-            this.logger = logger;
-            this.apiRequests = apiRequests;
-            this.apiRunner = apiRunner;
+            _languageValidator = languageValidator;
+            _logger = logger;
+            _apiRunner = apiRunner;
         }
 
         public async Task Process()
@@ -27,72 +24,72 @@ namespace DictionaryAppProject
             string word;
             int choice;
 
-            logger.LogMessage(Messages.WelcomeMessage());
+            _logger.LogMessage(Messages.WelcomeMessage());
 
             while (true)
             {
-                logger.LogMessage(Messages.Menu());
-                logger.LogMessage(Messages.InputMessage());
+                _logger.LogMessage(Messages.Menu());
+                _logger.LogMessage(Messages.InputMessage());
 
                 word = Console.ReadLine();
                 word = word.Trim().ToLower();
 
                 try
                 {
-                    if (!languageValidator.isValid(word))
+                    if (!_languageValidator.isValid(word))
                     {
                         throw new ArgumentException();
                     }
 
-                    logger.LogMessage(Messages.ChoiceMessage());
+                    _logger.LogMessage(Messages.ChoiceMessage());
                     choice = Convert.ToInt32(Console.ReadLine());
 
                     switch (choice)
                     {
                         case 1:
-                            await apiRunner.GetMeanings(word);
+                            await _apiRunner.GetMeanings(word);
                             break;
                         case 2:
-                            await apiRunner.GetSynonyms(word);
+                            await _apiRunner.GetSynonyms(word);
                             break;
                         case 3:
-                            await apiRunner.GetAntonyms(word);
+                            await _apiRunner.GetAntonyms(word);
                             break;
                         case 4:
-                            await apiRunner.GetAll(word);
+                            await _apiRunner.GetAll(word);
                             break;
                         case 5:
-                            logger.LogMessage(Messages.ExitMessage());
+                            _logger.LogMessage(Messages.ExitMessage());
                             Environment.Exit(0);
                             break;
                         default:
-                            logger.LogError(Messages.InvalidChoice());
+                            _logger.LogError(Messages.InvalidChoice());
                             break;
                     }
                 }
                 catch (ArgumentException)
                 {
-                    logger.LogError(Messages.InvalidArgument());
+                    _logger.LogError(Messages.InvalidArgument());
                 }
                 catch (FormatException)
                 {
-                    logger.LogError(Messages.InvalidChoice());
+                    _logger.LogError(Messages.InvalidChoice());
                 }
                 catch (WordNotFoundException ex)
                 {
-                    logger.LogError(ex.Message);
+                    _logger.LogError(ex.Message);
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex.Message);
+                    _logger.LogError(ex.Message);
                 }
 
-                logger.LogMessage(Messages.TryAgain());
+                _logger.LogMessage(Messages.TryAgain());
                 string tryAgain = Console.ReadLine().ToUpper();
 
                 if(!tryAgain.Equals("Y"))
                 {
-                    logger.LogMessage(Messages.ExitMessage());
+                    _logger.LogMessage(Messages.ExitMessage());
                     break;
                 }
             }

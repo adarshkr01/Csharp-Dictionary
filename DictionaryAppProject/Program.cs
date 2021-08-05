@@ -13,7 +13,7 @@ namespace DictionaryAppProject
 
             APIRunner apiRunner = new APIRunner(apiRequests, logger);
 
-            DictionaryProcessor dictionaryProcessor = new DictionaryProcessor(validator, logger, apiRequests, apiRunner);
+            DictionaryProcessor dictionaryProcessor = new DictionaryProcessor(validator, logger, apiRunner);
             await dictionaryProcessor.Process();
         }
     }
