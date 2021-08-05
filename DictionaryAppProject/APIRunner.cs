@@ -89,6 +89,7 @@ namespace DictionaryAppProject
         public async Task GetAntonyms(string word)
         {
             var parsedData = await MakeCalls(word);
+            bool antonymFlag = false;
 
             _logger.LogMessage("\n************************\n\tAntonyms\n************************");
 
@@ -102,11 +103,12 @@ namespace DictionaryAppProject
             {
                 Meta meta = data.meta;
 
-                if (meta.ants.Count == 0)
+                if (meta.ants.Count == 0 && antonymFlag == false)
                 {
                     _logger.LogError("Sorry, no antonyms were found");
                     return;
                 }
+                antonymFlag = true;
 
                 foreach (List<string> ants in meta.ants)
                 {
