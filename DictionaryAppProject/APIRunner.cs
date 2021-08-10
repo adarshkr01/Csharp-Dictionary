@@ -27,6 +27,7 @@ namespace DictionaryAppProject
             else
             {
                 parsedData = await _apiRequests.GetData(word);
+                _parsedData = parsedData;
             }
             return parsedData;
         }

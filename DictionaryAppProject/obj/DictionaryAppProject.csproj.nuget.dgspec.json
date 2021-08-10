@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\Desktop\\Assignment 1\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj": {}
+    "C:\\Users\\ADMIN\\Desktop\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\Desktop\\Assignment 1\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj": {
+    "C:\\Users\\ADMIN\\Desktop\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Assignment 1\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj",
         "projectName": "DictionaryAppProject",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Assignment 1\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj",
+        "projectPath": "C:\\Users\\ADMIN\\Desktop\\DictionaryAppProject\\DictionaryAppProject\\DictionaryAppProject.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Assignment 1\\DictionaryAppProject\\DictionaryAppProject\\obj\\",
+        "outputPath": "C:\\Users\\ADMIN\\Desktop\\DictionaryAppProject\\DictionaryAppProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
