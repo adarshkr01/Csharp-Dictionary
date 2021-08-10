@@ -5,8 +5,7 @@ namespace DictionaryAppProject
 {
     public class APIRunner : IAPIRunner
     {
-        private string _word = "";
-        private List<Root> _parsedData;
+        private Dictionary<string, List<Root>> _cache = new Dictionary<string, List<Root>>();
         private IAPIRequests _apiRequests;
         private ILogger _logger;
 
@@ -20,14 +19,14 @@ namespace DictionaryAppProject
         public async Task<List<Root>> MakeCalls(string word)
         {
             List<Root> parsedData;
-            if (word.Equals(_word))
+            if (_cache.ContainsKey(word))
             {
-                parsedData = _parsedData;
+                parsedData = _cache[word];
             }
             else
             {
                 parsedData = await _apiRequests.GetData(word);
-                _parsedData = parsedData;
+                _cache.Add(word, parsedData);
             }
             return parsedData;
         }
