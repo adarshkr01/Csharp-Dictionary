@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DictionaryAppProject
@@ -41,22 +42,29 @@ namespace DictionaryAppProject
                         throw new ArgumentException();
                     }
 
+                    Task<List<Root>> fetchAPIData = Task.Run(() => _apiRunner.MakeCalls(word));
+
                     _logger.LogMessage(Messages.ChoiceMessage());
                     choice = Convert.ToInt32(Console.ReadLine());
+
 
                     switch (choice)
                     {
                         case 1:
-                            await _apiRunner.GetMeanings(word);
+                            var parsedData = await fetchAPIData;
+                            await _apiRunner.GetMeanings(parsedData);
                             break;
                         case 2:
-                            await _apiRunner.GetSynonyms(word);
+                            parsedData = await fetchAPIData;
+                            await _apiRunner.GetSynonyms(parsedData);
                             break;
                         case 3:
-                            await _apiRunner.GetAntonyms(word);
+                            parsedData = await fetchAPIData;
+                            await _apiRunner.GetAntonyms(parsedData);
                             break;
                         case 4:
-                            await _apiRunner.GetAll(word);
+                            parsedData = await fetchAPIData;
+                            await _apiRunner.GetAll(parsedData);
                             break;
                         case 5:
                             _logger.LogMessage(Messages.ExitMessage());

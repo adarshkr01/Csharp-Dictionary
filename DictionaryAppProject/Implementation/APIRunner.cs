@@ -31,9 +31,9 @@ namespace DictionaryAppProject
             return parsedData;
         }
 
-        public async Task GetMeanings(string word)
+        public async Task GetMeanings(List<Root> parsedData)
         {
-            var parsedData = await MakeCalls(word);
+            //var parsedData = await MakeCalls(word);
 
             _logger.LogMessage("\n************************\n\tMeanings\n************************");
 
@@ -53,9 +53,9 @@ namespace DictionaryAppProject
             }
         }
 
-        public async Task GetSynonyms(string word)
+        public async Task GetSynonyms(List<Root> parsedData)
         {
-            var parsedData = await MakeCalls(word);
+            //var parsedData = await MakeCalls(word);
             bool synonymFlag = false;
 
             _logger.LogMessage("\n************************\n\tSynonyms\n************************");
@@ -89,9 +89,9 @@ namespace DictionaryAppProject
             _logger.LogMessage("\n");
         }
 
-        public async Task GetAntonyms(string word)
+        public async Task GetAntonyms(List<Root> parsedData)
         {
-            var parsedData = await MakeCalls(word);
+            //var parsedData = await MakeCalls(word);
             bool antonymFlag = false;
 
             _logger.LogMessage("\n************************\n\tAntonyms\n************************");
@@ -126,11 +126,11 @@ namespace DictionaryAppProject
 
         }
 
-        public async Task GetAll(string word)
+        public async Task GetAll(List<Root> parsedData)
         {
-            await GetMeanings(word);
-            await GetSynonyms(word);
-            await GetAntonyms(word);
+            await GetMeanings(parsedData);
+            await GetSynonyms(parsedData);
+            await GetAntonyms(parsedData);
         }
     }
 }
