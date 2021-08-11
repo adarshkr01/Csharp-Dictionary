@@ -38,3 +38,4 @@ C:\Users\ADMIN\Desktop\DictionaryAppProject\DictionaryAppProject\obj\Debug\net5.
 C:\Users\ADMIN\Desktop\DictionaryAppProject\DictionaryAppProject\obj\Debug\net5.0\ref\DictionaryAppProject.dll
 C:\Users\ADMIN\Desktop\DictionaryAppProject\DictionaryAppProject\obj\Debug\net5.0\DictionaryAppProject.pdb
 C:\Users\ADMIN\Desktop\DictionaryAppProject\DictionaryAppProject\obj\Debug\net5.0\DictionaryAppProject.genruntimeconfig.cache
+C:\Users\ADMIN\Desktop\DictionaryAppProject\DictionaryAppProject\bin\Debug\net5.0\Refit.dll

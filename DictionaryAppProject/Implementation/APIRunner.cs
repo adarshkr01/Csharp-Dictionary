@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Refit;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DictionaryAppProject
@@ -6,34 +7,34 @@ namespace DictionaryAppProject
     public class APIRunner : IAPIRunner
     {
         private Dictionary<string, List<Root>> _cache = new Dictionary<string, List<Root>>();
-        private IAPIRequests _apiRequests;
+        private List<Root> _parsedData;
         private ILogger _logger;
 
-        public APIRunner(IAPIRequests apiRequestObject, ILogger logger)
+        public APIRunner(ILogger logger)
         {
-            APIInitializer.InitializeClient();
-            _apiRequests = apiRequestObject;
             _logger = logger;
         }
 
-        public async Task<List<Root>> MakeCalls(string word)
+        public async Task MakeCalls(string word)
         {
-            List<Root> parsedData;
             if (_cache.ContainsKey(word))
             {
-                parsedData = _cache[word];
+                _parsedData = _cache[word];
             }
             else
             {
-                parsedData = await _apiRequests.GetData(word);
-                _cache.Add(word, parsedData);
+                IAPIRequests apiReq = RestService.For<IAPIRequests>(
+                    "https://www.dictionaryapi.com/api/v3/references/thesaurus/json");
+                List<Root> apiData = await apiReq.GetData(word);
+
+                _parsedData = apiData;
+                _cache.Add(word, _parsedData);
             }
-            return parsedData;
         }
 
-        public async Task GetMeanings(string word)
+        public void GetMeanings()
         {
-            var parsedData = await MakeCalls(word);
+            var parsedData = _parsedData;
 
             _logger.LogMessage("\n************************\n\tMeanings\n************************");
 
@@ -53,9 +54,9 @@ namespace DictionaryAppProject
             }
         }
 
-        public async Task GetSynonyms(string word)
+        public void GetSynonyms()
         {
-            var parsedData = await MakeCalls(word);
+            var parsedData = _parsedData;
             bool synonymFlag = false;
 
             _logger.LogMessage("\n************************\n\tSynonyms\n************************");
@@ -89,9 +90,9 @@ namespace DictionaryAppProject
             _logger.LogMessage("\n");
         }
 
-        public async Task GetAntonyms(string word)
+        public void GetAntonyms()
         {
-            var parsedData = await MakeCalls(word);
+            var parsedData = _parsedData;
             bool antonymFlag = false;
 
             _logger.LogMessage("\n************************\n\tAntonyms\n************************");
@@ -126,11 +127,11 @@ namespace DictionaryAppProject
 
         }
 
-        public async Task GetAll(string word)
+        public void GetAll()
         {
-            await GetMeanings(word);
-            await GetSynonyms(word);
-            await GetAntonyms(word);
+            GetMeanings();
+            GetSynonyms();
+            GetAntonyms();
         }
     }
 }

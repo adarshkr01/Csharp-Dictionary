@@ -8,9 +8,8 @@ namespace DictionaryAppProject
         {
             EnglishValidator validator = new EnglishValidator();
             ConsoleLogger logger = new ConsoleLogger();
-            APIRequests apiRequests = new APIRequests();
 
-            APIRunner apiRunner = new APIRunner(apiRequests, logger);
+            APIRunner apiRunner = new APIRunner(logger);
 
             DictionaryProcessor dictionaryProcessor = new DictionaryProcessor(validator, logger, apiRunner);
             await dictionaryProcessor.Process();
