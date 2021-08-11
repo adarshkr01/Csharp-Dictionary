@@ -15,3 +15,7 @@ I have decided to use Merriam-Webster's Collegiate Thesaurus (https://dictionary
 ## Design Considerations 
 
 The design of the application is prepared based on the SOLID principles. 
+
+## Flowchart 
+
+![flowchart](https://raw.githubusercontent.com/Niekon01/Csharp-Dictionary/main/flowchart.png)
