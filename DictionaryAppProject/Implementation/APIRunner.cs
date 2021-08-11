@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Refit;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DictionaryAppProject
@@ -7,13 +8,11 @@ namespace DictionaryAppProject
     {
         private Dictionary<string, List<Root>> _cache = new Dictionary<string, List<Root>>();
         List<Root> _parsedData;
-        private IAPIRequests _apiRequests;
         private ILogger _logger;
 
-        public APIRunner(IAPIRequests apiRequestObject, ILogger logger)
+        public APIRunner(ILogger logger)
         {
             APIInitializer.InitializeClient();
-            _apiRequests = apiRequestObject;
             _logger = logger;
         }
 
@@ -25,7 +24,11 @@ namespace DictionaryAppProject
             }
             else
             {
-                _parsedData = await _apiRequests.GetData(word);
+                IAPIRequests apiReq = RestService.For<IAPIRequests>(
+                    "https://www.dictionaryapi.com/api/v3/references/thesaurus/json");
+                List<Root> apiData = await apiReq.GetData(word);
+
+                _parsedData = apiData;
                 _cache.Add(word, _parsedData);
             }
         }
