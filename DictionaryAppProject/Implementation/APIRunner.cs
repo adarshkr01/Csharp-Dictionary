@@ -7,12 +7,11 @@ namespace DictionaryAppProject
     public class APIRunner : IAPIRunner
     {
         private Dictionary<string, List<Root>> _cache = new Dictionary<string, List<Root>>();
-        List<Root> _parsedData;
+        private List<Root> _parsedData;
         private ILogger _logger;
 
         public APIRunner(ILogger logger)
         {
-            APIInitializer.InitializeClient();
             _logger = logger;
         }
 
