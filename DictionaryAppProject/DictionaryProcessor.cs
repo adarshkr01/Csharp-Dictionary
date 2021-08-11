@@ -42,7 +42,7 @@ namespace DictionaryAppProject
                         throw new ArgumentException();
                     }
 
-                    Task<List<Root>> fetchAPIData = Task.Run(() => _apiRunner.MakeCalls(word));
+                    Task fetchAPIData = Task.Run(() => _apiRunner.MakeCalls(word));
 
                     _logger.LogMessage(Messages.ChoiceMessage());
                     choice = Convert.ToInt32(Console.ReadLine());
@@ -51,20 +51,20 @@ namespace DictionaryAppProject
                     switch (choice)
                     {
                         case 1:
-                            var parsedData = await fetchAPIData;
-                            await _apiRunner.GetMeanings(parsedData);
+                            await fetchAPIData;
+                            _apiRunner.GetMeanings();
                             break;
                         case 2:
-                            parsedData = await fetchAPIData;
-                            await _apiRunner.GetSynonyms(parsedData);
+                            await fetchAPIData;
+                            _apiRunner.GetSynonyms();
                             break;
                         case 3:
-                            parsedData = await fetchAPIData;
-                            await _apiRunner.GetAntonyms(parsedData);
+                            await fetchAPIData;
+                            _apiRunner.GetAntonyms();
                             break;
                         case 4:
-                            parsedData = await fetchAPIData;
-                            await _apiRunner.GetAll(parsedData);
+                            await fetchAPIData;
+                            _apiRunner.GetAll();
                             break;
                         case 5:
                             _logger.LogMessage(Messages.ExitMessage());

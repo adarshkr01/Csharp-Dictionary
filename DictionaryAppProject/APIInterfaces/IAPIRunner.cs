@@ -5,10 +5,10 @@ namespace DictionaryAppProject
 {
     public interface IAPIRunner
     {
-        Task<List<Root>> MakeCalls(string word);
-        Task GetMeanings(List<Root> parsedData);
-        Task GetSynonyms(List<Root> parsedData);
-        Task GetAntonyms(List<Root> parsedData);
-        Task GetAll(List<Root> parsedData);
+        Task MakeCalls(string word);
+        void GetMeanings();
+        void GetSynonyms();
+        void GetAntonyms();
+        void GetAll();
     }
 }
